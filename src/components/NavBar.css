@@ -26,7 +26,7 @@
     fill: white;
 }
 
-.Cabecera-nav{ background-color: bisque;}
+.Cabecera-nav{ }
 .Cabecera-ul{
     display: flex;
     flex-flow: row wrap;

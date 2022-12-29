@@ -1,5 +1,5 @@
 import './App.css'
-import Cabecera from './components/NavBar';
+import Cabecera from './Components/NavBar';
 
 const App= () => {
 
