@@ -1,11 +1,12 @@
 import './App.css'
-import Cabecera from './Components/NavBar';
+import Navbar from './Components/Navbar';
+import Cabecera from './Components/Navbar';
 
 const App= () => {
 
   return (
     <div className="App">
-      <Cabecera />
+      <Navbar/>
     </div>
   );
 }

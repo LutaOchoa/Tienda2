@@ -1,42 +1,117 @@
-import { useState } from 'react';
-import './NavBar.css';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import BurguerButton from './BurguerButton'
 
-const Cabecera = () => {
+function Navbar() {
 
-    const [menu,setMenu]=useState(false)
-
-    const toggleMenu = () => {
-        setMenu(!menu)
-    }
-
-return(
-    <header className="Cabecera">
-        <h1 className="Cabecera-h1">
-            <a href="#" className="Cabecera-a">
-                Tienda
-            </a>
-        </h1>
-
-        <button 
-            onClick={toggleMenu}
-        className='Cabecera-button'>
-        <svg className='Cabecera-svg' xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-        </svg>
-        </button>
-
-        <nav className={`Cabecera-nav ${menu?'isActive':'' }`}>
-            <ul className='Cabecera-ul'>
-                <li className='Cabecera-li'><a href='#' className='Cabecera-a'> ITEM 1</a></li>
-                <li className='Cabecera-li'><a href='#' className='Cabecera-a'> ITEM 2</a></li>
-                <li className='Cabecera-li'><a href='#' className='Cabecera-a'> ITEM 3</a></li>
-                <li className='Cabecera-li'><a href='#' className='Cabecera-a'> ITEM 4</a></li>
-                <li className='Cabecera-li'><a href='#' className='Cabecera-a'> ITEM 5</a></li>
-            </ul>
-        </nav>
-
-    </header>
-)
+  const [clicked, setClicked] = useState(false)
+  const handleClick = () => {
+    //cuando esta true lo pasa a false y vice versa
+    setClicked(!clicked)
+  }
+  return (
+    <>
+      <NavContainer>
+        <h2>Tienda <span>Online</span></h2>
+        <div className={`links ${clicked ? 'active' : ''}`}>
+          <a onClick={handleClick} href="#h">Home</a>
+          <a onClick={handleClick} href="#h">Shop</a>
+          <a onClick={handleClick} href="#h">About</a>
+          <a onClick={handleClick} href="#h">Contact</a>
+          <a onClick={handleClick} href="#h">Blog</a>
+        </div>
+        <div className='burguer'>
+          <BurguerButton clicked={clicked} handleClick={handleClick} />
+        </div>
+        <BgDiv className={`initial ${clicked ? ' active' : ''}`}></BgDiv>
+      </NavContainer>
+    </>
+  )
 }
 
-export default Cabecera 
+export default Navbar
+
+const NavContainer = styled.nav`
+  h2{
+    color: white;
+    font-weight: 400;
+    span{
+      font-weight: bold;
+    }
+  }
+  padding: .4rem;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  a{
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+  }
+  .links{
+    position: absolute;
+    top: -700px;
+    left: -2000px;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    transition: all .5s ease;
+    a{
+      color: white;
+      font-size: 2rem;
+      display: block;
+    }
+    @media(min-width: 768px){
+      position: initial;
+      margin: 0;
+      a{
+        font-size: 1rem;
+        color: white;
+        display: inline;
+      }
+      display: block;
+    }
+  }
+  .links.active{
+    width: 100%;
+    display: block;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 30%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    a{
+      font-size: 2rem;
+      margin-top: 1rem;
+      color: white;
+    }
+  }
+  .burguer{
+    @media(min-width: 768px){
+      display: none;
+    }
+  }
+`
+
+const BgDiv = styled.div`
+  background-color: #222;
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: all .6s ease ;
+  
+  &.active{
+    border-radius: 0 0 80% 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+`
