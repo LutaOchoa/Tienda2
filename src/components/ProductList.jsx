@@ -1,4 +1,6 @@
+
 import { data } from '../data';
+import { Link } from 'react-router-dom';
 
 export const ProductList = ({
 	allProducts,
@@ -35,6 +37,7 @@ export const ProductList = ({
 					<div className='info-product'>
 						<h2>{product.nameProduct}</h2>
 						<p className='price'>${product.price}</p>
+						<link key ={product.id} to ={'item/${product.id}'}>Mas informacion</link>
 						<button onClick={() => onAddProduct(product)}>
 							Añadir al carrito
 						</button>
